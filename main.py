@@ -10,9 +10,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 
-word_vectorizer = None
-toxic_clf = None
-
 # Your API definition
 app = Flask(__name__, static_url_path="",
             static_folder="static", template_folder="templates")
@@ -20,14 +17,7 @@ app = Flask(__name__, static_url_path="",
 
 @app.before_first_request
 def _load_model():
-    global word_vectorizer
-    global toxic_clf
-
-    with open("word_vectorizer.pkl", "rb") as vec:
-        word_vectorizer = pickle.load(vec)
-
-    with open("toxic_clf.pkl", "rb") as m_toxic:
-        toxic_clf = pickle.load(m_toxic)
+    pass
 
 
 @app.route("/")

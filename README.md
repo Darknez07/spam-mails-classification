@@ -4,11 +4,11 @@
 
 ##### 1. Clone the project to your Local Machine
 ```
-git clone https://github.com/krishnan-tech/toxic-comment-classification.git
+git clone https://github.com/krishnan-tech/spam-mails-classification.git
 ```
 ##### 2. Go to that directory
 ```
-cd toxic-comment-classification
+cd spam-mails-classification
 ```
 ##### 3. Install all requirements
 ```
@@ -26,4 +26,4 @@ http://127.0.0.1:5000/
 #### If you want to contribute that you are most welcome!
 
 # Have any Queries?
-###### Contact krishnannavadia@gmail.com"# spam-mails-classification" 
+###### Contact krishnannavadia@gmail.com"
