@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <title>Spam Mail Detection</title>
+</head>
+
+<body>
+  <style>
+    @import url(https://fonts.googleapis.com/css?family=Roboto);
+    @import url(https://fonts.googleapis.com/css?family=Roboto);
+
+    body {
+      margin: 40px 0 0;
+      background: #91D1D3;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .paper {
+      position: relative;
+      width: 90%;
+      max-width: 800px;
+      min-width: 400px;
+      height: 480px;
+      margin: 0 auto;
+      background: #fafafa;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .3);
+      overflow: hidden;
+    }
+
+    .paper:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      background: radial-gradient(#575450 6px, transparent 7px) repeat-y;
+      background-size: 30px 30px;
+      border-right: 3px solid #D44147;
+      box-sizing: border-box;
+    }
+
+    .paper-content {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      bottom: 30px;
+      left: 60px;
+      background: linear-gradient(transparent, transparent 28px, #91D1D3 28px);
+      background-size: 30px 30px;
+    }
+
+    .paper-content textarea {
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      max-height: 100%;
+      line-height: 30px;
+      padding: 0 10px;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: mediumblue;
+      font-family: 'Handlee', cursive;
+      font-weight: bold;
+      font-size: 18px;
+      box-sizing: border-box;
+      z-index: 1;
+    }
+
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(0, 0, 0, .6);
+    }
+
+    footer a {
+      color: rgba(255, 255, 255, .8);
+    }
+  </style>
+
+  <div style="width: 100%; text-align: center; margin-bottom: 30px;">
+    <h2>Spam Mail Detection</h2>
+    <i>Made by Krishnan Navadia</i>
+  </div>
+
+  <section class="section">
+
+    <form id="submit-form" action="/predict" method="POST" target="result"
+      onsubmit="this.submit(); this.reset(); return false;">
+      <div class="wrapper">
+
+        <div class="paper">
+          <div class="paper-content">
+            <textarea class="textarea" onkeyup="textCounter(this,'counter',280);" id="message" name="comment" rows=6
+              cols=50 maxlength="280" required autofocus placeholder="Type or paste mail here..."></textarea>
+          </div>
+        </div>
+      </div>
+      <span style="width: 100%; text-align: center;">
+        <div style="margin: 0 auto; margin-top: 20px;"><button type="submit" class="button">Predict</button></div>
+      </span>
+    </form>
+  </section>
+
+
+
+
+
+
+
+
+  <div style="width: 100%">
+    <section class="section" style="margin-top:20px; display: flex; flex: 1; justify-content: center;">
+      <span style='border: 2px solid #242424;'>
+        <iframe name="result" scrolling="no" frameborder="0" width=400; height=auto; overflow: hidden;></iframe>
+      </span>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
