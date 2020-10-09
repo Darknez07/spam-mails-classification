@@ -41,10 +41,9 @@ def predict():
                                                         df['label'],
                                                         random_state=1)
 
-    comment = (request.form["comment"])
+    mail = (request.form["comment"])
 
-    X_test = pd.Series(
-        [comment])
+    X_test = pd.Series([mail])
     print(X_test)
     y_test = pd.Series([1])
 
@@ -61,7 +60,7 @@ def predict():
 
     ans = "Not Spam" if precision_score(y_test, predictions) == 0 else "Spam"
 
-    result = "<b>Your comment is: " + comment + "</b><hr>" + \
+    result = "<b>Your mail is: " + mail + "</b><hr>" + \
         " <b>Prediction: " + ans + "</b>"
     return result
 
