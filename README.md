@@ -1,4 +1,4 @@
-# Toxic Comment Classification
+# Spam Mail Detection
 
 ## Installation Guide
 
