@@ -1,14 +1,8 @@
 # Dependencies
-from sklearn.model_selection import train_test_split
 from flask import Flask, request, jsonify, render_template, url_for, send_from_directory
 import pickle
 import traceback
-import pandas as pd
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
-
+from Model import train_model, model_predict
 
 # Your API definition
 app = Flask(__name__, static_url_path="",
@@ -17,7 +11,7 @@ app = Flask(__name__, static_url_path="",
 
 @app.before_first_request
 def _load_model():
-    pass
+    pickle.load(open('Voting_classifier'))
 
 
 @app.route("/")
@@ -28,40 +22,9 @@ def hello():
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    import pandas as pd
-    # Dataset from - https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection
-    df = pd.read_table('SMSSpamCollection',
-                       sep='\t',
-                       header=None,
-                       names=['label', 'sms_message'])
-
-    df['label'] = df.label.map({'ham': 0, 'spam': 1})
-
-    X_train, X_test, y_train, y_test = train_test_split(df['sms_message'],
-                                                        df['label'],
-                                                        random_state=1)
-
     mail = (request.form["comment"])
-
-    X_test = pd.Series([mail])
-    print(X_test)
-    y_test = pd.Series([1])
-
-    # Instantiate the CountVectorizer method
-    count_vector = CountVectorizer()
-    # Fit the training data and then return the matrix
-    training_data = count_vector.fit_transform(X_train)
-    testing_data = count_vector.transform(X_test)
-
-    naive_bayes = MultinomialNB()
-    naive_bayes.fit(training_data, y_train)
-
-    predictions = naive_bayes.predict(testing_data)
-
-    ans = "Not Spam" if precision_score(y_test, predictions) == 0 else "Spam"
-
-    result = "<b>Your mail is: " + mail + "</b><hr>" + \
-        " <b>Prediction: " + ans + "</b>"
+    result = model_predict(mail)
+    # Dataset from - https://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection
     return result
 
 
