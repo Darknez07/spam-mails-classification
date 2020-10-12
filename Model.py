@@ -71,7 +71,7 @@ def model_predict(mail):
     # Get predictions
     model = pck.load(open('Voting_classifier/Model.pkl','rb'))
 
-    ans = "Not Spam" if model.predict(second) == 0 else "Spam"
+    ans = "Not Spam" if model.predict(second)[0] == 0 else "Spam"
 
     result = "<b>Your mail is: " + mail + "</b><hr>" + \
     " <b>Prediction: " + ans + "</b>"
