@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction import text
 from sklearn.naive_bayes import GaussianNB, MultinomialNB
@@ -60,18 +61,19 @@ def train_model():
     print(classification_report(y_test,vcc.predict(testing_data.toarray()),target_names=["Ham","Spam"]))
 
 def model_predict(mail):
-    data = pd.DataFrame(mail)
+    data = pd.DataFrame([mail])
+    print(data)
     _, _, counter, transformer = get_data()
 
     # Convert data
-    
-    first = counter.transform(data)
+
+    first = counter.transform(data[0])
     second = transformer.transform(first)
 
     # Get predictions
     model = pck.load(open('Voting_classifier/Model.pkl','rb'))
 
-    ans = "Not Spam" if model.predict(second)[0] == 0 else "Spam"
+    ans = "Not Spam" if model.predict(second.toarray())[0] == 0 else "Spam"
 
     result = "<b>Your mail is: " + mail + "</b><hr>" + \
     " <b>Prediction: " + ans + "</b>"
@@ -82,8 +84,9 @@ def model_predict(mail):
 # Uncomment this after unextracting the Model.rar
 # If you run this script you will get the result on the test data
 # (training_data, y_train),(testing_data, y_test), _, _ = get_data()
-# model = pck.load(open('Voting_Classifier/Model.pkl','rb'))
+# model = pck.load(open('Voting_classifier/Model.pkl','rb'))
 # print(classification_report(y_test,
-#                             model.predict(testing_data.toarray()),
+#                             model.predict(np.array(testing_data.toarray(),dtype=np.float64)),
 #                             target_names=["Ham","Spam"]))
-
+# print()
+print(model_predict('Hey buddy how are you'))
