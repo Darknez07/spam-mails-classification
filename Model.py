@@ -62,21 +62,28 @@ def train_model():
 def model_predict(mail):
     data = pd.DataFrame(mail)
     _, _, counter, transformer = get_data()
+
     # Convert data
+    
     first = counter.transform(data)
     second = transformer.transform(first)
 
     # Get predictions
-    model = train_model()
+    model = pck.load(open('Voting_classifier/Model.pkl','rb'))
 
-    ans = "Not Spam" if precision_score(y_test, predictions) == 0 else "Spam"
+    ans = "Not Spam" if model.predict(second)[0] == 0 else "Spam"
 
     result = "<b>Your mail is: " + mail + "</b><hr>" + \
     " <b>Prediction: " + ans + "</b>"
+
     return result
 
 
-
-
-train_model()
+# Uncomment this after unextracting the Model.rar
+# If you run this script you will get the result on the test data
+# (training_data, y_train),(testing_data, y_test), _, _ = get_data()
+# model = pck.load(open('Voting_Classifier/Model.pkl','rb'))
+# print(classification_report(y_test,
+#                             model.predict(testing_data.toarray()),
+#                             target_names=["Ham","Spam"]))
 

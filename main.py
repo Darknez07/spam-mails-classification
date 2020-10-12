@@ -11,7 +11,7 @@ app = Flask(__name__, static_url_path="",
 
 @app.before_first_request
 def _load_model():
-    pickle.load(open('Voting_classifier'))
+    model = pickle.load(open('Voting_classifier/Model.pkl','rb'))
 
 
 @app.route("/")
